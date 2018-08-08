@@ -1,0 +1,75 @@
+apply plugin: 'com.android.library'
+
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    //添加依赖
+//    api project(':commlibs:lib-widget')
+//    api project(':commlibs:lib-utils')
+//    api project(':commlibs:lib-res')
+
+    //基本依赖
+    testImplementation "junit:junit:${rootProject.ext.junitVersion}"
+    api "com.android.support:support-annotations:${rootProject.ext.annotationsVersion}"
+    api "com.android.support:appcompat-v7:${rootProject.ext.supportLibraryVersion}"
+    api "com.android.support:recyclerview-v7:${rootProject.ext.supportLibraryVersion}"
+    api "com.android.support:cardview-v7:${rootProject.ext.supportLibraryVersion}"
+    api "com.android.support:support-v4:${rootProject.ext.supportLibraryVersion}"
+    api "com.android.support:design:${rootProject.ext.supportLibraryVersion}"
+    api "com.android.support.constraint:constraint-layout:${rootProject.ext.constraintVersion}"
+    api "com.google.code.gson:gson:${rootProject.ext.gsonVersion}"
+    api "com.alibaba:fastjson:${rootProject.ext.fastJsonVersion}"
+    api "com.android.support:multidex:${rootProject.ext.multidexVersion}"//1.0.3
+    //glide图片加载
+    api "com.github.bumptech.glide:glide:${rootProject.ext.glideVersion}"
+    configurations.all {//glide报错
+        resolutionStrategy.force "com.android.support:support-annotations:${rootProject.ext.annotationsVersion}"
+    }
+    //智能刷新布局
+    api "com.scwang.smartrefresh:SmartRefreshLayout:${rootProject.ext.smartrefreshVersion}"
+    api "com.scwang.smartrefresh:SmartRefreshHeader:${rootProject.ext.smartrefreshVersion}"
+
+    //retrofit
+    api "com.squareup.retrofit2:retrofit:${rootProject.ext.retrofitVersion}"
+    api ("com.squareup.retrofit2:converter-gson:${rootProject.ext.converterGsonVersion}"){
+        transitive = true;
+        exclude module: 'gson'
+    }
+    api ("com.squareup.retrofit2:converter-simplexml:${rootProject.ext.rconverterSimplexmlVersion}"){
+        exclude group: 'xpp3', module: 'xpp3'
+        exclude group: 'stax', module: 'stax-api'
+        exclude group: 'stax', module: 'stax'
+    }
+
+    //okhttp
+    api "com.squareup.okhttp3:okhttp:${rootProject.ext.okhttpVersion}"
+    api "com.squareup.okio:okio:${rootProject.ext.okioVersion}"
+    //rxandroid
+    api "io.reactivex:rxandroid:${rootProject.ext.rrxandroidVersion}"
+    api "io.reactivex:rxjava:${rootProject.ext.rxjavaVersion}"
+    api "com.squareup.retrofit2:adapter-rxjava:${rootProject.ext.adapterRxjavaVersion}"//2.1.0
+}
