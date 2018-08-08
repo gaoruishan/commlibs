@@ -1,0 +1,7 @@
+include ':app'
+//公共依赖-输出aar
+include ':commlibs',
+        ':commlibs:lib-base',
+        ':commlibs:lib-utils',
+        ':commlibs:lib-res',
+        ':commlibs:lib-widget'
