@@ -27,5 +27,5 @@ dependencies {
 //    androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2'
 //    implementation 'com.android.support:design:26.0.0-beta1'
 //    implementation 'com.google.code.gson:gson:2.8.2'
-    api project(':lib-base')
+    api project(':baselibrary')
 }
